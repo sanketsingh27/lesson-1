@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+.todoListItem {
+  display: flex;
+  border: 1px black solid;
+  max-width: 400px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 16px;
+  margin: 20px auto;
+}
+
+.todoListItem button {
+  margin: 5px;
+}

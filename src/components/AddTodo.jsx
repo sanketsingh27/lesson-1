@@ -1,10 +1,11 @@
 import { useState } from "react";
-export default function AddTodo({ addNewTodo }) {
+export default function AddTodo({ handleNewTodo }) {
   const [todo, setTodo] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
     //logic for add new todo
+    handleNewTodo(todo);
   };
 
   const handleTodo = (event) => {
