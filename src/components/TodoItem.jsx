@@ -1,4 +1,4 @@
-export default function TodoListItem({ task, taskId, markComplete, isCompleted }) {
+export default function TodoListItem({ task, taskId, markComplete, isCompleted, markDelete }) {
   const taskStyle = {
     textDecorationLine: isCompleted === true ? "line-through" : "none",
   };
@@ -9,7 +9,7 @@ export default function TodoListItem({ task, taskId, markComplete, isCompleted }
         <div style={taskStyle}>{task}</div>
         <div>
           <button onClick={() => markComplete(taskId)}>Mark Complete</button>
-          <button>Delete Item</button>
+          <button onClick={() => markDelete(taskId)}>Delete Item</button>
         </div>
       </div>
     </>

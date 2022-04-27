@@ -13,14 +13,21 @@ export default function Todo() {
   const [allTodo, setAllTodo] = useState(initialTasks);
 
   const markComplete = (todoId) => {
-    // const targetTodo = allTodo.find((element) => element.id === todoId);
-    // const newValue = { ...targetTodo, isCompleted: true };
-    // const newArr = [...allTodo, newValue];
-    // setAllTodo(newArr);
-
     const newTodoList = allTodo.map((element) => {
       if (element.id === todoId) {
         const newValue = { ...element, isCompleted: true };
+        return newValue;
+      }
+
+      return element; // return as it is
+    });
+    setAllTodo(newTodoList);
+  };
+
+  const markDelete = (todoId) => {
+    const newTodoList = allTodo.map((element) => {
+      if (element.id === todoId) {
+        const newValue = { ...element, isDeleted: true };
         return newValue;
       }
 
@@ -43,7 +50,7 @@ export default function Todo() {
   return (
     <>
       <AddTodo handleNewTodo={handleNewTodo} />
-      <TodoList markComplete={markComplete} allTodo={allTodo} />
+      <TodoList markComplete={markComplete} markDelete={markDelete} allTodo={allTodo} />
     </>
   );
 }
