@@ -1,5 +1,6 @@
 import AddTodo from "./AddTodo";
 import TodoList from "./TodoList";
+import FilteredData from "./FilteredData";
 import { nanoid } from "nanoid";
 import { useState } from "react";
 
@@ -11,6 +12,9 @@ export default function Todo() {
   ];
 
   const [allTodo, setAllTodo] = useState(initialTasks);
+
+  const [showFilteredData, setShowFilteredData] = useState(false); // which list to show
+  const [filteredData, setFilteredData] = useState([]);
 
   const markComplete = (todoId) => {
     const newTodoList = allTodo.map((element) => {
@@ -47,10 +51,32 @@ export default function Todo() {
     setAllTodo(newTodoList);
   };
 
+  const handleViewDeletedTask = () => {
+    setShowFilteredData(true);
+    const tasks = allTodo.filter((element) => element.isDeleted === true);
+    setFilteredData(tasks);
+  };
+
+  const handleViewAllTask = () => {
+    setShowFilteredData(true);
+    setFilteredData(allTodo);
+  };
+
   return (
     <>
       <AddTodo handleNewTodo={handleNewTodo} />
-      <TodoList markComplete={markComplete} markDelete={markDelete} allTodo={allTodo} />
+
+      <div>
+        <button onClick={() => setShowFilteredData(false)}>Active TODO</button>
+        <button onClick={handleViewDeletedTask}>All deleted Todo</button>
+        <button onClick={handleViewAllTask}>All Task</button>
+      </div>
+
+      {showFilteredData === true ? (
+        <FilteredData filteredData={filteredData} />
+      ) : (
+        <TodoList markComplete={markComplete} markDelete={markDelete} allTodo={allTodo} />
+      )}
     </>
   );
 }
