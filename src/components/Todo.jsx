@@ -2,7 +2,7 @@ import AddTodo from "./AddTodo";
 import TodoList from "./TodoList";
 import FilteredData from "./FilteredData";
 import { nanoid } from "nanoid";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Todo() {
   const initialTasks = [
@@ -75,7 +75,9 @@ export default function Todo() {
       {showFilteredData === true ? (
         <FilteredData filteredData={filteredData} />
       ) : (
-        <TodoList markComplete={markComplete} markDelete={markDelete} allTodo={allTodo} />
+        <>
+          <TodoList markComplete={markComplete} markDelete={markDelete} allTodo={allTodo} />
+        </>
       )}
     </>
   );
